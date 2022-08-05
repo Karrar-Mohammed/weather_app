@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.WeatherModel
 import com.karrar.weather_app.databinding.ActivityMainBinding
+import com.karrar.weather_app.util.formatDate
 import okhttp3.*
 import java.io.IOException
 
@@ -50,12 +52,22 @@ class MainActivity : AppCompatActivity() {
     private fun bindDataToUi(weather: WeatherModel?) {
         binding.apply {
             textTemperature.text = weather?.current?.temp?.toInt().toString() + "°"
-            textTimezone.text = weather?.timezone
+            textTimezone.text = resources.getString(R.string.esenyurt)
             textFeelsLike.text = "Feels Like ${weather?.current?.feelsLike?.toInt().toString() + "°"}"
+            textSunriseTime.text = weather?.current?.sunrise?.formatDate("h:mm a")
+            textSunsetTime.text = weather?.current?.sunset?.formatDate("h:mm a")
+
             weather?.hourly?.let {
                 val list = it.take(24)
                 val adapter = HourlyAdapter(list)
                 recyclerHourly.adapter = adapter
+            }
+
+            weather?.daily?.let {
+                val list = it.take(7)
+                val adapter = DailyAdapter(list)
+                recyclerDaily.adapter = adapter
+                recyclerDaily.suppressLayout(true)
             }
 
         }
