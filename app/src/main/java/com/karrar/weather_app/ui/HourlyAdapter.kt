@@ -10,7 +10,8 @@ import com.karrar.weather_app.databinding.ItemHourlyBinding
 import com.karrar.weather_app.util.formatDate
 import com.karrar.weather_app.util.loadWeatherIcon
 
-class HourlyAdapter(private val list: List<Hourly>): RecyclerView.Adapter<HourlyAdapter.HourlyViewHolder>() {
+class HourlyAdapter(private val list: List<Hourly>) :
+    RecyclerView.Adapter<HourlyAdapter.HourlyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyViewHolder {
@@ -22,9 +23,12 @@ class HourlyAdapter(private val list: List<Hourly>): RecyclerView.Adapter<Hourly
     override fun onBindViewHolder(holder: HourlyViewHolder, position: Int) {
         val currentItem = list[position]
         holder.binding.apply {
-            textHourlyTemp.text = currentItem.temp?.toInt().toString() + "°"
+            textHourlyTemp.text = textHourlyTemp.context.getString(
+                R.string.temperature,
+                currentItem.temp?.toInt().toString()
+            )
             textHourlyHumidity.text = currentItem.humidity.toString()
-            imageHourlyIcon.loadWeatherIcon(currentItem.weather?.get(0))
+            imageHourlyIcon.loadWeatherIcon(currentItem.weatherStatus?.get(0))
             textTimeHour.text = currentItem.dt?.formatDate("h a").toString()
         }
     }
@@ -32,8 +36,7 @@ class HourlyAdapter(private val list: List<Hourly>): RecyclerView.Adapter<Hourly
     override fun getItemCount() = list.size
 
 
-
-    class HourlyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class HourlyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemHourlyBinding.bind(itemView)
     }
 }

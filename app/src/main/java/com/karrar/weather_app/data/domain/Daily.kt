@@ -35,7 +35,7 @@ data class Daily(
     @SerializedName("uvi")
     val uvi: Double?,
     @SerializedName("weather")
-    val weather: List<Weather>?,
+    val weatherStatus: List<WeatherStatus>?,
     @SerializedName("wind_deg")
     val windDeg: Int?,
     @SerializedName("wind_gust")

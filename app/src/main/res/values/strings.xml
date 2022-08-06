@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Weather_app</string>
+    <string name="app_name">Weather app</string>
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
     <string name="esenyurt">Esenyurt</string>
+    <string name="temperature">%1$s°</string>
+    <string name="feels_like">Feels like %1$s°</string>
 </resources>

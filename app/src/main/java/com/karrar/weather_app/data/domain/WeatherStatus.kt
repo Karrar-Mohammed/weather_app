@@ -3,7 +3,7 @@ package com.karrar.weather_app.data.domain
 
 import com.google.gson.annotations.SerializedName
 
-data class Weather(
+data class WeatherStatus(
     @SerializedName("description")
     val description: String?,
     @SerializedName("icon")

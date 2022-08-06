@@ -5,10 +5,10 @@
     android:id="@+id/parent_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
-    android:background="#272939"
-    tools:context=".ui.MainActivity"
-    app:layoutDescription="@xml/activity_main_scene">
+    app:layoutDescription="@xml/activity_main_scene"
+    tools:context=".ui.MainActivity">
 
     <TextView
         android:id="@+id/text_timezone_header"
@@ -21,16 +21,16 @@
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/esenyurt" />
+        tools:text="@string/esenyurt" />
 
     <TextView
         android:id="@+id/text_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16"
         android:layout_marginStart="32dp"
-        android:textSize="48sp"
+        android:layout_marginTop="@dimen/margin_16"
         android:textColor="@color/white"
+        android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_timezone_header"
         tools:text="23" />
@@ -39,9 +39,9 @@
         android:id="@+id/text_timezone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:visibility="visible"
-        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/text_temperature"
         app:layout_constraintTop_toBottomOf="@+id/text_temperature"
         tools:text="@string/esenyurt" />
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_temperature"
         tools:ignore="ContentDescription"
-        android:src="@drawable/clear_sky" />
+        tools:src="@drawable/clear_sky" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
