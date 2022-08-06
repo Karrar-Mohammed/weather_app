@@ -23,7 +23,7 @@ class DailyAdapter(private val list: List<Daily>) :
         val currentItem = list[position]
         holder.binding.apply {
             textDayName.text = currentItem.dt?.formatDate("EEEE").toString()
-            textHumidityDaily.text = currentItem.humidity.toString()
+            textHumidityDaily.text = currentItem.humidity?.toInt().toString()
             textLowTemperature.text = textLowTemperature.context.getString(
                 R.string.temperature,
                 currentItem.temp?.min?.toInt().toString()

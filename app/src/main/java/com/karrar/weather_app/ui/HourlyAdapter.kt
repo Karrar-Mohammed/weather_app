@@ -27,7 +27,7 @@ class HourlyAdapter(private val list: List<Hourly>) :
                 R.string.temperature,
                 currentItem.temp?.toInt().toString()
             )
-            textHourlyHumidity.text = currentItem.humidity.toString()
+            textHourlyHumidity.text = currentItem.humidity?.toInt().toString()
             imageHourlyIcon.loadWeatherIcon(currentItem.weatherStatus?.get(0))
             textTimeHour.text = currentItem.dt?.formatDate("h a").toString()
         }
