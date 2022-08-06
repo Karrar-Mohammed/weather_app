@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.Hourly
 import com.karrar.weather_app.databinding.ItemHourlyBinding
 import com.karrar.weather_app.util.formatDate
+import com.karrar.weather_app.util.loadWeatherIcon
 
 class HourlyAdapter(private val list: List<Hourly>): RecyclerView.Adapter<HourlyAdapter.HourlyViewHolder>() {
 
@@ -24,7 +24,7 @@ class HourlyAdapter(private val list: List<Hourly>): RecyclerView.Adapter<Hourly
         holder.binding.apply {
             textHourlyTemp.text = currentItem.temp?.toInt().toString() + "°"
             textHourlyHumidity.text = currentItem.humidity.toString()
-            Glide.with(root.context).load("http://openweathermap.org/img/w/${currentItem.weather?.get(0)?.icon}.png").into(imageHourlyIcon)
+            imageHourlyIcon.loadWeatherIcon(currentItem.weather?.get(0))
             textTimeHour.text = currentItem.dt?.formatDate("h a").toString()
         }
     }

@@ -9,6 +9,7 @@ import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.Daily
 import com.karrar.weather_app.databinding.ItemDailyBinding
 import com.karrar.weather_app.util.formatDate
+import com.karrar.weather_app.util.loadWeatherIcon
 
 class DailyAdapter(val list: List<Daily>): RecyclerView.Adapter<DailyAdapter.DailyViewHolder>() {
 
@@ -25,7 +26,7 @@ class DailyAdapter(val list: List<Daily>): RecyclerView.Adapter<DailyAdapter.Dai
             textHumidityDaily.text = currentItem.humidity.toString()
             textLowTemperature.text = currentItem.temp?.min?.toInt().toString()+ "°"
             textHighTemperature.text = currentItem.temp?.max?.toInt().toString()+ "°"
-            Glide.with(root.context).load("http://openweathermap.org/img/w/${currentItem.weather?.get(0)?.icon}.png").into(imageDailyIcon)
+            imageDailyIcon.loadWeatherIcon(currentItem.weather?.get(0))
         }
     }
 

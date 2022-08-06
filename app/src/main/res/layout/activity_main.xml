@@ -2,6 +2,7 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,15 +11,28 @@
     app:layoutDescription="@xml/activity_main_scene">
 
     <TextView
+        android:id="@+id/text_timezone_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/esenyurt" />
+
+    <TextView
         android:id="@+id/text_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/margin_16"
         android:layout_marginStart="32dp"
         android:textSize="48sp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_timezone_header"
         tools:text="23" />
 
     <TextView
@@ -26,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:visibility="visible"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/text_temperature"
         app:layout_constraintTop_toBottomOf="@+id/text_temperature"
@@ -50,9 +65,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_temperature"
         tools:ignore="ContentDescription"
-        android:src="@drawable/sun" />
+        android:src="@drawable/clear_sky" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -69,11 +84,11 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_hourly"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="#D2CAD1FF"
+                android:backgroundTint="@color/card_view_background"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,11 +111,11 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/carView_daily"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_marginHorizontal="@dimen/margin_16"
                 android:layout_marginTop="16dp"
-                android:backgroundTint="#D2CAD1FF"
+                android:backgroundTint="@color/card_view_background"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -124,10 +139,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_sunrise_sunset"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_margin="@dimen/margin_16"
-                android:backgroundTint="#D2CAD1FF"
+                android:backgroundTint="@color/card_view_background"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -196,5 +211,5 @@
                 app:layout_constraintStart_toStartOf="@+id/text_sunset_time"
                 app:layout_constraintTop_toBottomOf="@+id/text_sunset_time" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.motion.widget.MotionLayout>

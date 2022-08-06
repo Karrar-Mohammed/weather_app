@@ -26,6 +26,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="22" />
 
+    <ImageView
+        android:id="@+id/image_daily_humidity"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/humidity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/text_humidity_daily"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/text_high_temperature"
         android:layout_width="wrap_content"

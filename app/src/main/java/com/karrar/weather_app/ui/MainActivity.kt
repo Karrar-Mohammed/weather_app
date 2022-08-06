@@ -9,6 +9,7 @@ import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.WeatherModel
 import com.karrar.weather_app.databinding.ActivityMainBinding
 import com.karrar.weather_app.util.formatDate
+import com.karrar.weather_app.util.loadWeatherIcon
 import okhttp3.*
 import java.io.IOException
 
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             textFeelsLike.text = "Feels Like ${weather?.current?.feelsLike?.toInt().toString() + "°"}"
             textSunriseTime.text = weather?.current?.sunrise?.formatDate("h:mm a")
             textSunsetTime.text = weather?.current?.sunset?.formatDate("h:mm a")
+            imageIcon.loadWeatherIcon(weather?.current?.weather?.get(0))
 
             weather?.hourly?.let {
                 val list = it.take(24)

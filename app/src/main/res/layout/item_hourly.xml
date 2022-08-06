@@ -33,8 +33,8 @@
         android:layout_marginTop="16dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/image_hourly_icon"
+        app:layout_constraintStart_toStartOf="@+id/image_hourly_icon"
         app:layout_constraintTop_toBottomOf="@+id/image_hourly_icon"
         tools:text="23" />
 
@@ -44,9 +44,19 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/text_hourly_temp"
+        app:layout_constraintStart_toEndOf="@id/image_hourly_humidity"
         tools:text="2%" />
+
+    <ImageView
+        android:id="@+id/image_hourly_humidity"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/humidity"
+        app:layout_constraintBottom_toBottomOf="@+id/text_hourly_humidity"
+        app:layout_constraintEnd_toStartOf="@+id/text_hourly_humidity"
+        app:layout_constraintStart_toStartOf="@+id/text_hourly_temp"
+        app:layout_constraintTop_toTopOf="@+id/text_hourly_humidity" />
 
 
 
