@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.Daily
 import com.karrar.weather_app.databinding.ItemDailyBinding
+import com.karrar.weather_app.util.Constants
 import com.karrar.weather_app.util.formatDate
 import com.karrar.weather_app.util.loadWeatherIcon
 
@@ -22,7 +23,7 @@ class DailyAdapter(private val list: List<Daily>) :
     override fun onBindViewHolder(holder: DailyViewHolder, position: Int) {
         val currentItem = list[position]
         holder.binding.apply {
-            textDayName.text = currentItem.dt?.formatDate("EEEE").toString()
+            textDayName.text = currentItem.dt?.formatDate(Constants.DateFormat.DAY).toString()
             textHumidityDaily.text = currentItem.humidity?.toInt().toString()
             textLowTemperature.text = textLowTemperature.context.getString(
                 R.string.temperature,

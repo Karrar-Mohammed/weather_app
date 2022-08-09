@@ -1,19 +1,17 @@
 package com.karrar.weather_app.data.network
 
-import android.util.Log
 import com.google.gson.Gson
 import com.karrar.weather_app.data.domain.WeatherModel
+import com.karrar.weather_app.util.Constants
 import com.karrar.weather_app.util.State
 import okhttp3.*
-import java.io.IOException
 
 object Client {
     private val client = OkHttpClient()
 
-   fun fetchData(): State<WeatherModel?>{
+   fun getWeatherData(): State<WeatherModel?> {
 
-        val request = Request.Builder().url(Url.getWeatherUrl()).build()
-
+       val request = Request.Builder().url(getWeatherUrl()).build()
        val response =  client.newCall(request).execute()
        return if (response.isSuccessful){
 
@@ -27,26 +25,16 @@ object Client {
 
     }
 
-
-
-//
-//    fun fetchData(myCallback: (result: WeatherModel?) -> Unit){
-//
-//        val request = Request.Builder().url(Url.getWeatherUrl()).build()
-//
-//        client.newCall(request).enqueue(object : Callback {
-//
-//            override fun onResponse(call: Call, response: Response) {
-//                response.body?.string().let { jsonString ->
-//                    val result = Gson().fromJson(jsonString, WeatherModel::class.java)
-//                    myCallback.invoke(result)
-//                }
-//            }
-//
-//            override fun onFailure(call: Call, e: IOException) {
-//                Log.d("TAG", "onFailure: ${e.message}")
-//            }
-//        })
-//    }
+    private fun getWeatherUrl(): HttpUrl {
+        return HttpUrl.Builder()
+            .scheme(Constants.Api.PROTOCOL)
+            .host(Constants.Api.HOST)
+            .addPathSegments("data/2.5/onecall")
+            .addQueryParameter(Constants.Api.LAT, "41.034283")
+            .addQueryParameter(Constants.Api.LON, "28.680119")
+            .addQueryParameter(Constants.Api.APPID, Constants.Api.KEY)
+            .addQueryParameter(Constants.Api.UNITS, "metric")
+            .build()
+    }
 
 }

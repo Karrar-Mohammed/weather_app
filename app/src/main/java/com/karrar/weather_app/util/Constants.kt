@@ -17,4 +17,9 @@ object Constants {
 
     }
 
+    object DateFormat {
+        const val HOUR = "h a"
+        const val DAY = "EEEE"
+    }
+
 }

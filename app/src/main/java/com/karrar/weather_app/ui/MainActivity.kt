@@ -7,6 +7,7 @@ import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.WeatherModel
 import com.karrar.weather_app.data.network.Client
 import com.karrar.weather_app.databinding.ActivityMainBinding
+import com.karrar.weather_app.util.Constants
 import com.karrar.weather_app.util.formatDate
 import com.karrar.weather_app.util.loadWeatherIcon
 
@@ -22,17 +23,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-
         getWeatherInfo()
 
     }
 
     private fun getWeatherInfo() {
-        Client.fetchData{ result ->
-            runOnUiThread {
-                bindDataToUi(result)
-            }
-        }
+
     }
 
 
@@ -43,8 +39,8 @@ class MainActivity : AppCompatActivity() {
             textTimezone.text = getString(R.string.esenyurt)
             textTimezoneHeader.text = getString(R.string.esenyurt)
             textFeelsLike.text = getString(R.string.feels_like, weather?.current?.feelsLike?.toInt().toString())
-            textSunriseTime.text = weather?.current?.sunrise?.formatDate("h:mm a")
-            textSunsetTime.text = weather?.current?.sunset?.formatDate("h:mm a")
+            textSunriseTime.text = weather?.current?.sunrise?.formatDate(Constants.DateFormat.HOUR)
+            textSunsetTime.text = weather?.current?.sunset?.formatDate(Constants.DateFormat.HOUR)
             imageIcon.loadWeatherIcon(weather?.current?.weatherStatus?.get(0))
 
             weather?.hourly?.let {
