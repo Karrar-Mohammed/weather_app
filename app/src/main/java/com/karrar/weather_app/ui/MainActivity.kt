@@ -38,6 +38,18 @@ class MainActivity : AppCompatActivity() {
             emitter.onNext(State.Loading)
             emitter.onNext(Client.getWeatherData())
         }
+        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+            { response ->
+                when(response){
+                    State.Loading -> {
+//                        TODO()
+                    }
+                    is State.Success -> bindDataToUi(response.data)
+                    is State.Error -> Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+                }
+        },{
+            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+            })
     }
 
     private fun bindDataToUi(weather: WeatherModel?) {
