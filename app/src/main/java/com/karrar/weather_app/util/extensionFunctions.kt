@@ -30,7 +30,7 @@ fun ImageView.loadWeatherIcon(weatherStatus: WeatherStatus?) {
             .load(R.drawable.rain)
             .into(this)
         else -> Glide.with(this)
-            .load("http://openweathermap.org/img/w/${weatherStatus?.icon}.png")
+            .load(Constants.Api.URL_IMAGE + weatherStatus?.icon + Constants.Api.IMAGE_EXTENSION)
             .into(this)
     }
 }
