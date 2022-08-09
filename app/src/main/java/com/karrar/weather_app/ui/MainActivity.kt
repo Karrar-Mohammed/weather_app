@@ -9,12 +9,10 @@ import com.karrar.weather_app.data.remote.Client
 import com.karrar.weather_app.databinding.ActivityMainBinding
 import com.karrar.weather_app.util.formatDate
 import com.karrar.weather_app.util.loadWeatherIcon
-import okhttp3.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -25,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setup() {
         getWeatherInfo()
-
     }
 
 

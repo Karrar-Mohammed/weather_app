@@ -11,7 +11,7 @@ object Client {
 
    fun fetchData(myCallback: (result: WeatherModel?) -> Unit){
 
-        val request = Request.Builder().url(getWeatherUrl()).build()
+        val request = Request.Builder().url(Url.getWeatherUrl()).build()
 
         client.newCall(request).enqueue(object : Callback {
 
@@ -28,17 +28,4 @@ object Client {
         })
     }
 
-    private fun getWeatherUrl(): HttpUrl {
-        return HttpUrl.Builder()
-            .scheme("http")
-            .host("api.openweathermap.org")
-            .addPathSegment("data")
-            .addPathSegment("2.5")
-            .addPathSegment("onecall")
-            .addQueryParameter("lat", "41.034283")
-            .addQueryParameter("lon", "28.680119")
-            .addQueryParameter("appid", "25acea668518011d09cbb69aad983022")
-            .addQueryParameter("units", "metric")
-            .build()
-    }
 }
