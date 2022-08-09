@@ -1,22 +1,19 @@
 package com.karrar.weather_app.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.google.gson.Gson
 import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.WeatherModel
+import com.karrar.weather_app.data.remote.Client
 import com.karrar.weather_app.databinding.ActivityMainBinding
 import com.karrar.weather_app.util.formatDate
 import com.karrar.weather_app.util.loadWeatherIcon
 import okhttp3.*
-import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,21 +30,11 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun getWeatherInfo() {
-        val request = Request.Builder().url(getWeatherUrl()).build()
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.d("TAG", "onFailure: ${e.message}")
+        Client.fetchData{ result ->
+            runOnUiThread {
+                bindDataToUi(result)
             }
-
-            override fun onResponse(call: Call, response: Response) {
-                response.body?.string().let { jsonString ->
-                    val result = Gson().fromJson(jsonString, WeatherModel::class.java)
-                    runOnUiThread {
-                        bindDataToUi(result)
-                    }
-                }
-            }
-        })
+        }
     }
 
 
@@ -78,18 +65,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun getWeatherUrl(): HttpUrl {
-        return HttpUrl.Builder()
-            .scheme("http")
-            .host("api.openweathermap.org")
-            .addPathSegment("data")
-            .addPathSegment("2.5")
-            .addPathSegment("onecall")
-            .addQueryParameter("lat", "41.034283")
-            .addQueryParameter("lon", "28.680119")
-            .addQueryParameter("appid", "25acea668518011d09cbb69aad983022")
-            .addQueryParameter("units", "metric")
-            .build()
-    }
 }
