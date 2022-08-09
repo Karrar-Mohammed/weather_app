@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.WeatherModel
-import com.karrar.weather_app.data.remote.Client
+import com.karrar.weather_app.data.network.Client
 import com.karrar.weather_app.databinding.ActivityMainBinding
 import com.karrar.weather_app.util.formatDate
 import com.karrar.weather_app.util.loadWeatherIcon
@@ -22,9 +22,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-        getWeatherInfo()
+//        getWeatherInfo()
     }
-
 
     private fun getWeatherInfo() {
         Client.fetchData{ result ->

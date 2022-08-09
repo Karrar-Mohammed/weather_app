@@ -1,4 +1,4 @@
-package com.karrar.weather_app.data.remote
+package com.karrar.weather_app.data.network
 
 import com.karrar.weather_app.util.Constants
 import okhttp3.HttpUrl
