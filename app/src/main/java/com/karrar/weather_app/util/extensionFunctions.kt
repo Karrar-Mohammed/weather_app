@@ -28,6 +28,5 @@ fun ImageView.loadWeatherIcon(weatherStatus: WeatherStatus?) {
         500 to R.drawable.rain,
     )
     val default = "http://openweathermap.org/img/w/${weatherStatus?.icon}.png"
-    weatherIcon.getOrDefault(weatherStatus?.id,default)
-    weatherIcon.get(weatherStatus?.id)?.let { this.setImageResource(it) }
+    Glide.with(this.context).load(weatherIcon.getOrDefault(weatherStatus?.id,default)).into(this)
 }
