@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-//        getWeatherInfo()
+
+        getWeatherInfo()
+
     }
 
     private fun getWeatherInfo() {
