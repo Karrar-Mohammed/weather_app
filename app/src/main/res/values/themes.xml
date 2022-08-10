@@ -18,4 +18,13 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_icon</item>
         <item name="postSplashScreenTheme">@style/Theme.Weather_app</item>
     </style>
+
+
+    <style name="DefaultTextStyle" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="TitleTextStyle" parent="DefaultTextStyle">
+        <item name="android:textSize">@dimen/font_size_secondary</item>
+        <item name="android:fontWeight">800</item>
+    </style>
 </resources>

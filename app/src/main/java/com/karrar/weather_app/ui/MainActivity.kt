@@ -1,6 +1,8 @@
 package com.karrar.weather_app.ui
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -45,21 +47,56 @@ class MainActivity : AppCompatActivity() {
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
             { response ->
                 when (response) {
-                    State.Loading -> {}
-                    is State.Success -> bindDataToUi(response.data)
-                    is State.Error -> Toast.makeText(this, response.message, Toast.LENGTH_SHORT)
-                        .show()
+                    State.Loading -> {
+                        setLoadingViewVisible()
+                    }
+                    is State.Success -> {
+                        bindDataToUi(response.data)
+                        setSuccessViewVisible()
+                    }
+                    is State.Error -> {
+                    }
                 }
             }, {
+                setErrorViewVisible()
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             })
     }
-
 
     private fun bindDataToUi(weather: WeatherModel?) {
         setupCurrentDayWeather(weather?.current)
         setupDailyRecycler(weather?.daily)
         setupHourlyRecycler(weather?.hourly)
+    }
+
+    private fun setLoadingViewVisible() {
+        binding.apply {
+            progressBar.visibility = View.VISIBLE
+            parentConstraint.visibility = View.GONE
+            errorAnimation.visibility = View.GONE
+            textViewErrorTitle.visibility = View.GONE
+            textViewTryAgain.visibility = View.GONE
+        }
+    }
+
+    private fun setErrorViewVisible() {
+        binding.apply {
+            progressBar.visibility = View.GONE
+            parentConstraint.visibility = View.GONE
+            errorAnimation.visibility = View.VISIBLE
+            textViewErrorTitle.visibility = View.VISIBLE
+            textViewTryAgain.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setSuccessViewVisible() {
+        binding.apply {
+            progressBar.visibility = View.GONE
+            parentConstraint.visibility = View.VISIBLE
+            errorAnimation.visibility = View.GONE
+            textViewErrorTitle.visibility = View.GONE
+            textViewTryAgain.visibility = View.GONE
+        }
     }
 
     private fun setupCurrentDayWeather(currentWeather: Current?) {
