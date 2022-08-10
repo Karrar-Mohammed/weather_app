@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.Hourly
 import com.karrar.weather_app.databinding.ItemHourlyBinding
+import com.karrar.weather_app.util.Constants
 import com.karrar.weather_app.util.formatDate
 import com.karrar.weather_app.util.loadWeatherIcon
 
@@ -29,7 +30,7 @@ class HourlyAdapter(private val list: List<Hourly>) :
             )
             textHourlyHumidity.text = currentItem.humidity?.toInt().toString()
             imageHourlyIcon.loadWeatherIcon(currentItem.weatherStatus?.get(0))
-            textTimeHour.text = currentItem.dt?.formatDate("h a").toString()
+            textTimeHour.text = currentItem.dt?.formatDate(Constants.DateFormat.HOUR).toString()
         }
     }
 

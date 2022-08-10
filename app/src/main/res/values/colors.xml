@@ -8,4 +8,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="card_view_background">#D2AFB6E6</color>
     <color name="background">#272939</color>
+    <color name="red">#EF4444</color>
 </resources>
