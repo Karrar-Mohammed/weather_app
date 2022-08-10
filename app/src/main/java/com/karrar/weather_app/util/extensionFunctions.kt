@@ -1,10 +1,8 @@
 package com.karrar.weather_app.util
 
 
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.ViewTarget
 import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.WeatherStatus
 import java.time.Instant
@@ -27,6 +25,6 @@ fun ImageView.loadWeatherIcon(weatherStatus: WeatherStatus?) {
         804 to R.drawable.clouds,
         500 to R.drawable.rain,
     )
-    val default = "http://openweathermap.org/img/w/${weatherStatus?.icon}.png"
-    Glide.with(this.context).load(weatherIcon.getOrDefault(weatherStatus?.id,default)).into(this)
+    val defaultIcon = Constants.Api.URL_IMAGE + weatherStatus?.icon + Constants.Api.IMAGE_EXTENSION
+    Glide.with(this.context).load(weatherIcon.getOrDefault(weatherStatus?.id, defaultIcon)).into(this)
 }
