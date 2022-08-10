@@ -1,6 +1,7 @@
 package com.karrar.weather_app.ui
 
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                         .show()
                 }
             }, {
-                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                setContentView(R.layout.error)
             })
     }
 
