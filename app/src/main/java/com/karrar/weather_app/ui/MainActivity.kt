@@ -27,8 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        setContentView(R.layout.loading)
         getWeatherInfo()
     }
 
@@ -57,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun bindDataToUi(weather: WeatherModel?) {
+        setContentView(binding.root)
         setupCurrentDayWeather(weather?.current)
         setupDailyRecycler(weather?.daily)
         setupHourlyRecycler(weather?.hourly)

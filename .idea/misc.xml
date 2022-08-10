@@ -7,10 +7,12 @@
         <entry key="..\:/Users/Time TraveleR/AndroidStudioProjects/Weather_app/app/src/main/res/layout/activity_main.xml" value="0.2865853658536585" />
         <entry key="..\:/Users/Time TraveleR/AndroidStudioProjects/Weather_app/app/src/main/res/layout/item_daily.xml" value="0.5" />
         <entry key="..\:/Users/Time TraveleR/AndroidStudioProjects/Weather_app/app/src/main/res/layout/item_hourly.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/loading.xml" value="0.1921875" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
