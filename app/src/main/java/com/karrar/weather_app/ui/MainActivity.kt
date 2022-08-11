@@ -11,17 +11,17 @@ import com.karrar.weather_app.data.domain.Hourly
 import com.karrar.weather_app.data.domain.WeatherModel
 import com.karrar.weather_app.data.network.Client
 import com.karrar.weather_app.databinding.ActivityMainBinding
-import com.karrar.weather_app.util.Constants
-import com.karrar.weather_app.util.State
-import com.karrar.weather_app.util.formatDate
-import com.karrar.weather_app.util.loadWeatherIcon
+import com.karrar.weather_app.util.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 }
             },{
             onError()
-        })
+        }).add(compositeDisposable)
     }
 
     private fun onSuccess(weather: WeatherModel?) {
@@ -135,4 +135,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        super.onDestroy()
+    }
+
+
 }

@@ -5,6 +5,8 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.karrar.weather_app.R
 import com.karrar.weather_app.data.domain.WeatherStatus
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -27,4 +29,8 @@ fun ImageView.loadWeatherIcon(weatherStatus: WeatherStatus?) {
     )
     val defaultIcon = Constants.Api.URL_IMAGE + weatherStatus?.icon + Constants.Api.IMAGE_EXTENSION
     Glide.with(this.context).load(weatherIcon.getOrDefault(weatherStatus?.id, defaultIcon)).into(this)
+}
+
+fun Disposable.add(compositeDisposable: CompositeDisposable) {
+    compositeDisposable.add(this)
 }
