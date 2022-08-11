@@ -1,9 +1,7 @@
 package com.karrar.weather_app.ui
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.karrar.weather_app.R
@@ -30,8 +28,14 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        callbacks()
         getWeatherInfo()
+    }
+
+    private fun callbacks() {
+        binding.textViewTryAgain.setOnClickListener {
+            getWeatherInfo()
+        }
     }
 
     private fun getWeatherInfo() {
@@ -44,32 +48,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun subscribeOnWeatherObservable(observable: Observable<State<WeatherModel?>>) {
-        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-            { response ->
+        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe ({ response ->
                 when (response) {
                     State.Loading -> {
-                        setLoadingViewVisible()
+                        onLoading()
                     }
                     is State.Success -> {
-                        bindDataToUi(response.data)
-                        setSuccessViewVisible()
+                        onSuccess(response.data)
                     }
                     is State.Error -> {
+                        onError()
                     }
                 }
-            }, {
-                setErrorViewVisible()
-                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-            })
+            },{
+            onError()
+        })
     }
 
-    private fun bindDataToUi(weather: WeatherModel?) {
+    private fun onSuccess(weather: WeatherModel?) {
+        binding.apply {
+            progressBar.visibility = View.GONE
+            parentConstraint.visibility = View.VISIBLE
+            errorAnimation.visibility = View.GONE
+            textViewErrorTitle.visibility = View.GONE
+            textViewTryAgain.visibility = View.GONE
+        }
+
         setupCurrentDayWeather(weather?.current)
         setupDailyRecycler(weather?.daily)
         setupHourlyRecycler(weather?.hourly)
     }
 
-    private fun setLoadingViewVisible() {
+    private fun onLoading() {
         binding.apply {
             progressBar.visibility = View.VISIBLE
             parentConstraint.visibility = View.GONE
@@ -79,23 +89,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setErrorViewVisible() {
+    private fun onError() {
         binding.apply {
             progressBar.visibility = View.GONE
             parentConstraint.visibility = View.GONE
             errorAnimation.visibility = View.VISIBLE
             textViewErrorTitle.visibility = View.VISIBLE
             textViewTryAgain.visibility = View.VISIBLE
-        }
-    }
-
-    private fun setSuccessViewVisible() {
-        binding.apply {
-            progressBar.visibility = View.GONE
-            parentConstraint.visibility = View.VISIBLE
-            errorAnimation.visibility = View.GONE
-            textViewErrorTitle.visibility = View.GONE
-            textViewTryAgain.visibility = View.GONE
         }
     }
 
